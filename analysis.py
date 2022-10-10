@@ -8,7 +8,7 @@ import customtkinter
 
 # standards
 dif_p = 7  # number of different p values
-p_standards = [0.4, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]  # standard settings
+p_standards = [0.4, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]  # standard values
 min_z_standard = 1
 max_z_standard = 5
 min_n_standard = 2
