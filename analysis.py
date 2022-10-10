@@ -3,12 +3,11 @@ from tkinter import ttk
 import calculation
 import simulation
 import pandas as pd
-import math
-import customtkinter
+
 
 # standards
 dif_p = 7  # number of different p values
-p_standards = [0.4, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]  # standard settings
+p_standards = [0.001, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]  # standard settings
 min_z_standard = 1
 max_z_standard = 5
 min_n_standard = 2
@@ -60,7 +59,7 @@ def find_optimum(N, min_n, max_n, p, min_z, max_z, min_t, max_t, optimization,
                     if not is_limited_definition:
                         if t ** (z - 1) <= n:
                             steps += 1
-    step_size = 1 / steps
+    step_size = 1 / steps  # ln49-62 progressbar step_size
 
     for z in z_list:
         t_list = list(range(min_t, max_t + 1))
