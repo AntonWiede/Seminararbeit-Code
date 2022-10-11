@@ -7,18 +7,18 @@ import pandas as pd
 
 # standards
 dif_p = 7  # number of different p values
-p_standards = [0.001, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]  # standard settings
+p_standards = [0.001, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]  # standard p values
 min_z_standard = 1
 max_z_standard = 5
 min_n_standard = 2
 max_n_standard = 32
 min_t_standard = 2
 max_t_standard = 10
-is_optimization = False
+is_optimization = False  # default button settings
 is_limited_Definition = False
 
 
-def change_opt_bool(self):
+def change_opt_bool(self):  # opt button change
     global is_optimization
     if is_optimization:
         is_optimization = False
@@ -28,7 +28,7 @@ def change_opt_bool(self):
         self.config(relief=SUNKEN)
 
 
-def change_lim_bool(self):
+def change_lim_bool(self):  # lim button change
     global is_limited_Definition
     if is_limited_Definition:
         self.config(relief=RAISED)
@@ -63,24 +63,24 @@ def find_optimum(N, min_n, max_n, p, min_z, max_z, min_t, max_t, optimization,
 
     for z in z_list:
         t_list = list(range(min_t, max_t + 1))
-        if z == 1:
+        if z == 1:  # no different t values for z = 1
             t_list = [1]
         for t in t_list:
             n_list = list(range(min_n, max_n + 1))  # create list with all possible values for n
             erase_list = []
             if is_limited_definition:
                 for n in n_list:
-                    if ((n / (t ** (z - 1))) % 1) != 0 or ((n / (t ** (z - 1))) == 1):
+                    if ((n / (t ** (z - 1))) % 1) != 0 or ((n / (t ** (z - 1))) == 1):  # all n not included in lim def
                         erase_list.append(n)
-            if not is_limited_definition:
+            if not is_limited_definition:  # all impossible n 
                 for n in n_list:
                     if t ** (z-1) > n or ((n / (t ** (z - 1))) == 1):
                         erase_list.append(n)
-            for n in erase_list:
+            for n in erase_list:  # create final n list
                 n_list.remove(n)
             for n in n_list:  # list ist completed
                 progressbar['value'] += step_size*100
-                root.update_idletasks()
+                root.update_idletasks()  # update progessbar
                 if method == "calc":
                     if not optimization:
                         value = calculation.cost(N, n, p, t, z)
@@ -91,12 +91,12 @@ def find_optimum(N, min_n, max_n, p, min_z, max_z, min_t, max_t, optimization,
                         value = simulation.simulation(N, n, p, t, z, optimization)
                     if optimization == 1:
                         value = simulation.simulation(N, n, p, t, z, optimization)
-                if value < data[0]:
+                if value < data[0]:  # insert new optimum
                     data[0] = value
                     data[1] = n
                     data[2] = z
                     data[3] = t
-        if data[0] >= N and min_n <= 1 and min_z <= 1:
+        if data[0] >= N and min_n <= 1 and min_z <= 1:  # no optimum found
             data[0] = N
             data[1] = 1
             data[2] = 0
@@ -171,7 +171,7 @@ def read_and_fill(
         df.to_csv("data_multistage_opt.csv", index=False)
 
 
-root = Tk("Pool Tests")
+root = Tk("Pool Tests")  # user interface ln. 174-270
 
 root.geometry("1000x200")
 
@@ -241,6 +241,10 @@ for i in range(dif_p):
     e.grid(row=4, column=i + 1)
     e.insert(0, str(p_standards[i]))
     ir_entries.append(e)
+
+
+# toggle buttons lim_def and reduced
+
 
 b_calculate = Button(root, text="calculate", command=lambda: read_and_fill(["calc", "window"]))
 b_calculate.grid(row=0, column=6)
