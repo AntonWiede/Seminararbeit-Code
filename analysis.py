@@ -171,7 +171,7 @@ def read_and_fill(
 
 root = Tk("Pool Tests")  # user interface ln. 174-270
 
-root.geometry("1000x200")
+root.geometry("1000x300")
 
 l_N = Label(root, text="N")  # entry for N
 l_N.grid(row=0, column=0)
