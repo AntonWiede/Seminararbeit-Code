@@ -4,7 +4,6 @@ import calculation
 import simulation
 import pandas as pd
 
-
 # standards
 dif_p = 7  # number of different p values
 p_standards = [0.001, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4]  # standard p values
@@ -44,7 +43,7 @@ def find_optimum(N, min_n, max_n, p, min_z, max_z, min_t, max_t, optimization,
     root.update_idletasks()
     z_list = list(range(min_z, max_z + 1))
     t_list = list(range(min_t, max_t + 1))
-    data = [N*10, 32, 1, 2]  # store optimal values 1: tests; 2: optimal n; 3 = optimal z, 4:optimal_t
+    data = [N * 10, 32, 1, 2]  # store optimal values 1: tests; 2: optimal n; 3 = optimal z, 4:optimal_t
     steps = 0
     for z in z_list:  # all possible combinations of t and z
         if z == 1:
@@ -74,12 +73,12 @@ def find_optimum(N, min_n, max_n, p, min_z, max_z, min_t, max_t, optimization,
                         erase_list.append(n)
             if not is_limited_definition:  # all impossible n 
                 for n in n_list:
-                    if t ** (z-1) > n or ((n / (t ** (z - 1))) == 1):
+                    if t ** (z - 1) > n or ((n / (t ** (z - 1))) == 1):
                         erase_list.append(n)
             for n in erase_list:  # create final n list
                 n_list.remove(n)
             for n in n_list:  # list ist completed
-                progressbar['value'] += step_size*100
+                progressbar['value'] += step_size * 100
                 root.update_idletasks()  # update progessbar
                 if method == "calc":
                     if not optimization:
@@ -106,8 +105,7 @@ def find_optimum(N, min_n, max_n, p, min_z, max_z, min_t, max_t, optimization,
 
 def read_and_fill(
         method):  # method[0]: "calc" = calculate; "sim" = simulate; method[1]: window = normal output; csv = csv output
-    global is_limited_Definition, optimum_value
-    global is_optimization
+    global is_limited_Definition, optimum_value, is_optimization
     N = int(e_N.get())
     min_z = int(e_min_z.get())
     max_z = int(e_max_z.get())
@@ -146,10 +144,10 @@ def read_and_fill(
         all_p = []
         small_p = list(range(1, 10))
         for x in small_p:
-            all_p.append(x/1000)  # create list of all p's
+            all_p.append(x / 1000)  # create list of all p's
         normal_p = list(range(1, 51))
         for x in normal_p:
-            all_p.append(x/100)
+            all_p.append(x / 100)
         for p in all_p:
 
             if method[0] == "calc":
@@ -241,7 +239,6 @@ for i in range(dif_p):
     e.grid(row=4, column=i + 1)
     e.insert(0, str(p_standards[i]))
     ir_entries.append(e)
-
 
 # toggle buttons lim_def and reduced
 
