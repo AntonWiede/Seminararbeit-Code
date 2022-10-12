@@ -16,7 +16,6 @@ def cost(N, n, p, t, z):
 def cost_optimised(N, n, p, t, z):
     counter = 0
 
-
     if z == 0:
         counter += 1
     if z >= 2:
@@ -24,8 +23,6 @@ def cost_optimised(N, n, p, t, z):
             i += 1
             counter += ((t ** i) / n) * (1 - (1 - p) ** (n / (t ** (i - 1))))
             counter -= ((t ** (i - 1)) / n) * (((1 - p) ** (n / (t ** i))) ** (t - 1)) * (1 - (1 - p) ** (n / (t ** i)))
-
-
 
     if z >= 1:
         counter += (1 / n)
@@ -37,7 +34,8 @@ def cost_optimised(N, n, p, t, z):
 
 
 def calc_optimum(N, min_n, max_n, p, max_z, min_t, max_t, optimization,
-                  is_limited_definition):  # calculate all values for one value p
+                 # not used for "analysis.py" only "find_interval_n.py"
+                 is_limited_definition):  # calculate all values for one value p
 
     t_list = list(range(min_t, max_t + 1))
     z_list = list(range(1, max_z + 1))
@@ -63,7 +61,7 @@ def calc_optimum(N, min_n, max_n, p, max_z, min_t, max_t, optimization,
                     n_list.remove(n)
             for n in n_list:  # list ist completed
                 n_counter += 1
-                progress += step_size/len(n_list)
+                progress += step_size / len(n_list)
                 if not optimization:
                     value = cost(N, n, p, t, z)
                 if optimization:
