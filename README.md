@@ -38,6 +38,8 @@ estimated simulation time:
 ## Usage Terminal:
 
 ```python
-import analisys
+import analysis
 
-find_optimum(
+#returns optimal procedure in format : [T(n), optimal n, optimal, z, optimal t]
+find_optimum(N, min_n, max_n, p, min_z, max_z, min_t, max_t, optimization,
+                 is_limited_definition, method)
