@@ -13,7 +13,7 @@ pip install tkinter
 pip install pandas
 ```
 
-## Usage
+## Usage GUI
 
 entries: input min and max values
 
@@ -34,3 +34,10 @@ csv_calc : calculate all n, t, z in intervals [0.001; 0.01] (stepsize = 0.001) a
 sim_calc: calculate all n, t, z in intervals [0.001; 0.01] (stepsize = 0.001) and [0.01; 0.5] (stepsize = 0.01) and export to csv file
 
 estimated simulation time: 
+
+## Usage Terminal:
+
+```python
+import analisys
+
+find_optimum(
