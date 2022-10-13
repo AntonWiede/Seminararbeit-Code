@@ -9,6 +9,9 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install tkinter
 ```bash
 pip install tkinter
 ```
+```bash
+pip install pandas
+```
 
 ## Usage
 
