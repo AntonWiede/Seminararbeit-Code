@@ -65,15 +65,17 @@ def find_optimum(N, min_n, max_n, p, min_z, max_z, min_t, max_t, optimization,
         if z == 1:  # no different t values for z = 1
             t_list = [1]
         for t in t_list:
+            print(progressbar['value'])
             n_list = list(range(min_n, max_n + 1))  # create list with all possible values for n
             erase_list = []
             if is_limited_definition:
                 for n in n_list:
-                    if ((n / (t ** (z - 1))) % 1) != 0 or ((n / (t ** (z - 1))) == 1):  # all n not included in lim def
+                    if ((n / (t ** (z - 1))) % 1) != 0 or ((n / (t ** (z + 1))) == 1) or (
+                            (n / (t ** (z - 1))) == 1):  # all n not included in lim def
                         erase_list.append(n)
             if not is_limited_definition:  # all impossible n 
                 for n in n_list:
-                    if t ** (z - 1) > n or ((n / (t ** (z - 1))) == 1):
+                    if t ** (z - 1) > n or ((n / (t ** (z + 1))) == 1) or ((n / (t ** (z - 1))) == 1):
                         erase_list.append(n)
             for n in erase_list:  # create final n list
                 n_list.remove(n)
